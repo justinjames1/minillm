@@ -8,6 +8,7 @@ int training_buffer[5] = {0,0,0,0};
 int bias_buffer[5] = {0,0,0,0};
 int weight_buffer[5] = {10,10,10,10};
 int input[5] = {22,54,42,55};
+int a;
 int loss;
 for(int i; loss!=0;){
 int w1,w2,w3,w4; w1 = weight_buffer[0]; w2 = weight_buffer[1]; w3 = weight_buffer[2]; w4 = weight_buffer[3]; 
@@ -20,11 +21,17 @@ z3 = input[3]; z3 = z3*w3+b3; if(z3>0){z3=z3;}else{z3=0;}
 z4 = input[4]; z4 = z4*w4+b4; if(z4>0){z4=z4;}else{z4=0;}
 
 int output[4] = {z1,z2,z3,z4};
+int s1;
+int s2;
+int s3;
+int s4;
 
 int loss1 = training_buffer[0] - output[0]; if(loss1>0){weight_buffer[0]-=1;} if(loss1<0){weight_buffer[0]+=1;} 
 int loss2 = training_buffer[1] - output[1]; if(loss2>0){weight_buffer[1]-=1;} if(loss2<0){weight_buffer[1]+=1;}
 int loss3 = training_buffer[2] - output[2]; if(loss3>0){weight_buffer[2]-=1;} if(loss3<0){weight_buffer[2]+=1;} 
 int loss4 = training_buffer[3] - output[3]; if(loss4>0){weight_buffer[3]-=1;} if(loss4<0){weight_buffer[3]+=1;} 
-loss = loss1+loss2+loss3+loss4;
+if(loss1==0){a+1; s1 = output[0];} if(loss2==0){a+1;s2 = output[1];} if(loss3==0){a+1;s3 = output[2];} if(loss4==0){a+1;s4 = output[3];}
+if (a==4){break;printf("final answer.\n");printf("%i",s1);printf("%i",s2);printf("%i",s3);printf("%i",s4);     }
+
 }
 }
